@@ -29,6 +29,7 @@ function AllBooks(props) {
       <div className="bookList">
         {books.map((book, index) => (
           <BookCard 
+            id={book.id}
             title={book.title}
             img={book.img}
             author={book.author}

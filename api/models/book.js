@@ -5,7 +5,7 @@ var bookSchema = new mongoose.Schema({
     type: String,
   },
   author: {
-    type: String,
+    type: Array,
   },
   desc: {
     type: String,

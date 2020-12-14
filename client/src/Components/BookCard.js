@@ -6,20 +6,22 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
+import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import DeleteIcon from '@material-ui/icons/Delete';
 import './BookCard.css';
 
 const useStyles = makeStyles({
   root: {
     borderRadius: 12,
-    maxWidth: 300,
+    maxWidth: 154,
     padding: 12,
     margin: 'auto',
   },
   media: {
     borderRadius: 6,
-    height: 375,
-    width: 300,
+    height: 200,
+    width: 150,
     margin: 12
   },
 });
@@ -28,7 +30,7 @@ export default function BookCard(props) {
   const classes = useStyles();
 
   return (
-    <Card id="book" borderTop={10}>
+    <Card className="book" id={props.id} borderTop={10}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -36,7 +38,7 @@ export default function BookCard(props) {
           title=""
         />
         <CardContent className={classes.root}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="p" component="h3">
             {props.title}
           </Typography>
           <Typography gutterBottom variant="overline" component="overline">
@@ -46,6 +48,7 @@ export default function BookCard(props) {
             <Rating name="read-only" value={props.rating} readOnly />
           </Box>
         </CardContent>
+        {/* <Button type="submit" onSubmit={onSubmit}><DeleteIcon /></Button> */}
       </CardActionArea>
     </Card>
   );
