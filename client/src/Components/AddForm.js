@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 // import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -30,13 +30,12 @@ export default function FormPropsTextFields() {
     onSubmit: (values) => {
       console.log('inside of onsubmit')
       console.log(values)
-      // alert(JSON.stringify(values, null, 2));
       fetch('http://localhost:8080/api/books/', {
         method: 'post',
         headers: new Headers({
           'Content-Type': 'application/json',
         }),
-        body: JSON.stringify({name:values})
+        body: JSON.stringify(values)
       })
 
     },
@@ -93,7 +92,6 @@ export default function FormPropsTextFields() {
           type="date"
           value={formik.values.startDate}
           onChange={formik.handleChange}
-          // className={classes.textField}
           InputLabelProps={{
             shrink: true,
           }}
@@ -105,7 +103,6 @@ export default function FormPropsTextFields() {
           type="date"
           value={formik.values.endDate}
           onChange={formik.handleChange}
-          // className={classes.textField}
           InputLabelProps={{
             shrink: true,
           }}
@@ -117,65 +114,3 @@ export default function FormPropsTextFields() {
     </div>
   );
 };
-
-// import React, { useState } from 'react';
-// import TextField from '@material-ui/core/TextField';
-// import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     '& .MuiTextField-root': {
-//       margin: theme.spacing(1),
-//       width: '25ch',
-//     },
-//   },
-//   textField: {
-//     marginLeft: theme.spacing(1),
-//     marginRight: theme.spacing(1),
-//     width: 200,
-//   },
-// }));
-
-// export default function FormPropsTextFields() {
-//   const classes = useStyles();
-//   const [title, setTitle] = useState('')
-
-//   return (
-//     <form className={classes.root} noValidate autoComplete="off">
-//       <div>
-//         <TextField 
-//           required id="title" 
-//           label="Required" 
-//           value={title}
-//           onChange={e => setTitle(e.target.value)}
-//           defaultValue="Title"
-//         />
-//         <TextField 
-//           required id="author" 
-//           label="Required" 
-//           defaultValue="Author" 
-//         />
-//         <TextField
-//           id="desc"
-//           label=""
-//           defaultValue="Book Description"
-//         />
-//         <TextField
-//           id="img"
-//           label=""
-//           defaultValue="Image Link"
-//         />
-//         <TextField
-//           id="startDate"
-//           label="Start Date"
-//           type="date"
-//           defaultValue="2017-05-24"
-//           // className={classes.textField}
-//           InputLabelProps={{
-//             shrink: true,
-//           }}
-//         />
-//       </div>
-//     </form>
-//   );
-// }

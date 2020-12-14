@@ -3,11 +3,9 @@ var mongoose = require('mongoose');
 var bookSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: 'Title cannot be blank'
   },
   author: {
     type: String,
-    required: 'Author cannot be blank'
   },
   desc: {
     type: String,
