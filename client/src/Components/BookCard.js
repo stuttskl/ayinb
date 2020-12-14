@@ -38,7 +38,7 @@ export default function BookCard(props) {
           title=""
         />
         <CardContent className={classes.root}>
-          <p>{props.id}</p>
+          {/* <p>{props.id}</p> */}
           <Typography gutterBottom variant="p" component="h3">
             {props.title}
           </Typography>
