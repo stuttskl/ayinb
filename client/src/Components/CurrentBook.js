@@ -9,9 +9,8 @@ import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Collapse from '@material-ui/core/Collapse';
-import FormPropsTextFields from './AddForm';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
@@ -78,7 +77,6 @@ export default function RecipeReviewCard() {
         </CardContent>
       </Collapse>
     </Card>
-    <FormPropsTextFields />
     </>
   );
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import SearchForm from '../Components/SearchForm'
+import AddForm from '../Components/AddForm';
 
 
 function Search() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(true);  
 
   if (error) {
     return <div>Error: {error.message} </div>;
@@ -14,7 +14,8 @@ function Search() {
   } else {
     return (
       <>
-      <SearchForm />
+        <h1>Add A Book to Your Shelf</h1>
+        <AddForm />
       </>
     )
   }

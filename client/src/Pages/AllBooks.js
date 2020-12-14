@@ -27,9 +27,9 @@ function AllBooks(props) {
     <>
       <h2>Your 2020 Shelf</h2>
       <div className="bookList">
-        {books.map((book, index) => (
+        {books.map((book) => (
           <BookCard 
-            id={book.id}
+            id={book._id}
             title={book.title}
             img={book.img}
             author={book.author}

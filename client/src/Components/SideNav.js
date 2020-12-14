@@ -27,12 +27,13 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ListIcon from '@material-ui/icons/List';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
 import Home from '../Pages/Home';
 import AllBooks from '../Pages/AllBooks';
+import AddBook from '../Pages/AddBook';
+
 import { ReadingList } from '../Pages/ReadingList';
 import Search from '../Pages/Search';
-
-// import Routes from '../Routes';
 
 
 const drawerWidth = 240;
@@ -187,6 +188,12 @@ export default function MiniDrawer() {
                 <ListItemText primary="All Books" />
               </ListItem> 
             </Link>
+            <Link to="/add">
+              <ListItem button key="Add a Book">
+                <ListItemIcon><AddIcon /></ListItemIcon>
+                <ListItemText primary="Add a Book" />
+              </ListItem> 
+            </Link>
             <Link to="/readinglist">
               <ListItem button key="Reading List">
                 <ListItemIcon><ListIcon /></ListItemIcon>
@@ -209,6 +216,9 @@ export default function MiniDrawer() {
               </Route>
               <Route path="/all">
                 <AllBooks />
+              </Route>
+              <Route path="/add">
+                <AddBook />
               </Route>
               <Route path="/readinglist">
                 <ReadingList />

@@ -37,7 +37,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
 export default function SearchForm() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
@@ -50,31 +49,30 @@ export default function SearchForm() {
     },
     // validationSchema: validationSchema,
     onSubmit: (query) => {
-      // console.log('inside of google api fetech request')
-      // console.log(query["query"])
       query = query["query"]
       fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`)
         .then(res => res.json())
-        // .then(console.log(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`))
         .then(
           (result) => {
             setIsLoaded(true);
             setData(result.items);
           },
           (error) => {
-            setIsLoaded(true);
+            setIsLoaded(false);
             setError(error);
           }
         )
     },
   });
-  if (error) {
-    return <div>Error: {error.message} </div>;
-  } else if(!isLoaded) {
-    return <div>Loading....</div>;
-  } else {
+  // TODO: fix this block so that the loading and error are based on the api call, not the page loading
+  // if (error) {
+  //   return <div>Error: {error.message} </div>;
+  // } else if(!isLoaded) {
+  //   return <div>Loading....</div>;
+  // } else {
   return (
     <div>
+      <h1>Search for a Book</h1>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -89,23 +87,16 @@ export default function SearchForm() {
         </Button>
       </form>
       <Column p={0} gap={0} className={styles.card}>
-        <Row wrap p={2} alignItems={'baseline'} className={styles.header}>
-          <Item stretched className={styles.headline}>Search Results</Item>
-          <Item className={styles.actions}>
-            <Link className={styles.link}>Add Book</Link> •{' '}
-            <Link className={styles.link}>See all</Link>
-          </Item>
-        </Row>
         {data.map(item => (
           <BookItem 
+            // id={item.id}
             title={item.volumeInfo.title} 
             author={item.volumeInfo.authors} 
             src={item.volumeInfo.imageLinks.thumbnail} 
-            desc={item.volumeInfo.description}
+            desc={item.volumeInfo.description} // TODO: fix desc so that it wraps
           />
         ))}
       </Column>
     </div>
-  );
-  }
+    );
 };
