@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-// import * as yup from 'yup';
+import * as Yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import BookItem from '../Components/BookItem';
@@ -37,17 +37,22 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+const validationSchema = Yup.object().shape({
+  query: Yup.string()
+  .required('Search query required!'),
+});
+
 export default function SearchForm() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const styles = useStyles();
-
+  let toRender;
   const formik = useFormik({
     initialValues: {
       query: ''
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: (query) => {
       query = query["query"]
       fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`)
@@ -64,39 +69,55 @@ export default function SearchForm() {
         )
     },
   });
-  // TODO: fix this block so that the loading and error are based on the api call, not the page loading
-  // if (error) {
-  //   return <div>Error: {error.message} </div>;
-  // } else if(!isLoaded) {
-  //   return <div>Loading....</div>;
-  // } else {
-  return (
-    <div>
-      <h1>Search for a Book</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="query"
-          name="query"
-          label="query"
-          value={formik.values.query}
-          onChange={formik.handleChange}
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
+  
+  if(!isLoaded) {
+    toRender = <>
+        <h1>Search for a Book</h1>
+          <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="query"
+            name="query"
+            label="query"
+            value={formik.values.query}
+            onChange={formik.handleChange}
+          />
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </form>
+      </>
+  } else if (error) {
+    toRender = <h1>Error: {error.message}</h1>
+  } else {
+    toRender = 
+    <>
+    <h1>Search for a Book</h1>
+          <form onSubmit={formik.handleSubmit}>
+          <TextField
+            fullWidth
+            id="query"
+            name="query"
+            label="query"
+            value={formik.values.query}
+            onChange={formik.handleChange}
+          />
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </form>
       <Column p={0} gap={0} className={styles.card}>
         {data.map(item => (
           <BookItem 
-            // id={item.id}
+            id={item.id}
             title={item.volumeInfo.title} 
             author={item.volumeInfo.authors} 
-            src={item.volumeInfo.imageLinks.thumbnail} 
+            src={item.volumeInfo.imageLinks === undefined ? "" : item.volumeInfo.imageLinks.thumbnail}
             desc={item.volumeInfo.description} // TODO: fix desc so that it wraps
           />
         ))}
       </Column>
-    </div>
-    );
+      </>
+  }
+  return toRender;
 };

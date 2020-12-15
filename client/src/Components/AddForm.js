@@ -1,19 +1,22 @@
 import React from 'react';
 import { useFormik } from 'formik';
-// import * as yup from 'yup';
+import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import './AddForm.css';
 
-// const validationSchema = yup.object({
-//   email: yup
-//     .string('Enter your email')
-//     .email('Enter a valid email')
-//     .required('Email is required'),
-//   password: yup
-//     .string('Enter your password')
-//     .min(8, 'Password should be of minimum 8 characters length')
-//     .required('Password is required'),
-// });
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .required('Book title is required'),
+  author: yup
+    .string()
+    .required('Book author is required'),
+  rating: yup
+    .number()
+    .min(0)
+    .max(5)
+});
 
 export default function FormPropsTextFields() {
   const formik = useFormik({
@@ -26,7 +29,8 @@ export default function FormPropsTextFields() {
       startDate: '',
       endDate: ''
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
+
     onSubmit: (values) => {
       console.log('inside of onsubmit')
       console.log(values)
@@ -37,18 +41,16 @@ export default function FormPropsTextFields() {
         }),
         body: JSON.stringify(values)
       })
-
     },
   });
-
   return (
-    <div>
+    <div className="container">
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
           id="title"
           name="title"
-          label="title"
+          label="Book Title"
           value={formik.values.title}
           onChange={formik.handleChange}
         />
@@ -56,7 +58,7 @@ export default function FormPropsTextFields() {
           fullWidth
           id="author"
           name="author"
-          label="author"
+          label="Author"
           value={formik.values.author}
           onChange={formik.handleChange}
         />
@@ -64,7 +66,7 @@ export default function FormPropsTextFields() {
           fullWidth
           id="desc"
           name="desc"
-          label="desc"
+          label="Description"
           value={formik.values.desc}
           onChange={formik.handleChange}
         />
@@ -72,7 +74,7 @@ export default function FormPropsTextFields() {
           fullWidth
           id="img"
           name="img"
-          label="img"
+          label="Image Link"
           value={formik.values.img}
           onChange={formik.handleChange}
         />
@@ -80,7 +82,7 @@ export default function FormPropsTextFields() {
           fullWidth
           id="rating"
           name="rating"
-          label="rating"
+          label="Rating"
           type="number"
           value={formik.values.rating}
           onChange={formik.handleChange}
@@ -107,7 +109,7 @@ export default function FormPropsTextFields() {
             shrink: true,
           }}
         />
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Button color="primary" variant="contained" type="submit">
           Submit
         </Button>
       </form>

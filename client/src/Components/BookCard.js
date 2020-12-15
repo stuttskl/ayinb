@@ -29,6 +29,14 @@ const useStyles = makeStyles({
 export default function BookCard(props) {
   const classes = useStyles();
 
+  function handleDelete(e) {
+    console.log('inside of delete!')
+    console.log(e.target.id)
+    fetch(`http://localhost:8080/api/books/${e.target.id}`, 
+    {
+      method: 'delete'
+    });
+  }
   return (
     <Card className="book" id={props.id} borderTop={10}>
       <CardActionArea>
@@ -38,7 +46,7 @@ export default function BookCard(props) {
           title=""
         />
         <CardContent className={classes.root}>
-          {/* <p>{props.id}</p> */}
+          <p>{props.id}</p>
           <Typography gutterBottom variant="p" component="h3">
             {props.title}
           </Typography>
@@ -49,7 +57,7 @@ export default function BookCard(props) {
             <Rating name="read-only" value={props.rating} readOnly />
           </Box>
         </CardContent>
-        {/* <Button type="submit" onSubmit={onSubmit}><DeleteIcon /></Button> */}
+        {/* <Button onClick={handleDelete(props.id)}><DeleteIcon /></Button> */}
       </CardActionArea>
     </Card>
   );

@@ -35,6 +35,10 @@ const useBookStyles = makeStyles(() => ({
 const BookItem = ({ id, src, title, author, desc }) => {
   const avatarStyles = useDynamicAvatarStyles({ size: 70 });
   const styles = useBookStyles();
+  
+  function confirmAdd() {
+    alert("Added to your shelf!");
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -61,13 +65,13 @@ const BookItem = ({ id, src, title, author, desc }) => {
         </Item>
         <Row wrap grow gap={0.5} minWidth={0}>
           <Item grow minWidth={0}>
-            <div className={cx(styles.name, styles.text)} id="id" name="id" value={id}>{id}</div>
+            <div className={cx(styles.name, styles.text)} style={{"display": "none"}} id="id" name="id" value={id}>{id}</div>
             <div className={cx(styles.name, styles.text)} id="title" name="title" value={title}>{title}</div>
             <div className={cx(styles.caption, styles.text)} id="author" name="author" value={author}>{author}</div>
             <div className={cx(styles.caption, styles.text)} id="desc" name="desc" value={desc}>{desc}</div>
           </Item>
           <Item position={'middle'}>
-            <Button className={styles.btn} variant={'outlined'} type="submit">
+            <Button className={styles.btn} onClick={confirmAdd} variant={'outlined'} type="submit">
               Add to Shelf
             </Button>
           </Item>
