@@ -7,6 +7,7 @@ import BookItem from '../Components/BookItem';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import './SearchForm.css';
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -71,14 +72,14 @@ export default function SearchForm() {
   });
   
   if(!isLoaded) {
-    toRender = <>
+    toRender = <div className="container">
         <h1>Search for a Book</h1>
           <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="query"
             name="query"
-            label="query"
+            label="Enter search term..."
             value={formik.values.query}
             onChange={formik.handleChange}
           />
@@ -86,19 +87,20 @@ export default function SearchForm() {
             Submit
           </Button>
         </form>
-      </>
+      </div>
   } else if (error) {
     toRender = <h1>Error: {error.message}</h1>
   } else {
     toRender = 
     <>
-    <h1>Search for a Book</h1>
-          <form onSubmit={formik.handleSubmit}>
+    <div className="container">
+      <h1>Search for a Book</h1>
+        <form onSubmit={formik.handleSubmit}>
           <TextField
             fullWidth
             id="query"
             name="query"
-            label="query"
+            label="Enter another search term..."
             value={formik.values.query}
             onChange={formik.handleChange}
           />
@@ -106,6 +108,7 @@ export default function SearchForm() {
             Submit
           </Button>
         </form>
+    </div>
       <Column p={0} gap={0} className={styles.card}>
         {data.map(item => (
           <BookItem 

@@ -23,6 +23,14 @@ function AllBooks(props) {
     )
   }, [])
 
+  // function handleDelete(id) {
+  //     fetch(`http://localhost:8080/api/books/${id}`, 
+  //     {
+  //       method: 'delete'
+  //     });
+  //     const newBooks = books.filter(book => book._id !== id);
+  //     setBooks({books: newBooks});
+  //   }
   return (
     <>
       <h2>Your 2020 Shelf</h2>
@@ -34,6 +42,7 @@ function AllBooks(props) {
             img={book.img}
             author={book.author}
             rating={book.rating}
+            // handleDelete={handleDelete(book.id)}
           />
         ))}
       </div>

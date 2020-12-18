@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -28,14 +28,14 @@ const useStyles = makeStyles({
 
 export default function BookCard(props) {
   const classes = useStyles();
-
-  function handleDelete(e) {
-    console.log('inside of delete!')
-    console.log(e.target.id)
-    fetch(`http://localhost:8080/api/books/${e.target.id}`, 
+  const [state, setState] = useState({books: []})
+  function handleDelete(id) {
+    fetch(`http://localhost:8080/api/books/${id}`, 
     {
       method: 'delete'
     });
+    const newBooks = state.books.filter(book => book._id !== id);
+    setState({books: newBooks})
   }
   return (
     <Card className="book" id={props.id} borderTop={10}>
@@ -57,7 +57,7 @@ export default function BookCard(props) {
             <Rating name="read-only" value={props.rating} readOnly />
           </Box>
         </CardContent>
-        {/* <Button onClick={handleDelete(props.id)}><DeleteIcon /></Button> */}
+        <Button onClick={() => handleDelete(props.id)}><DeleteIcon /></Button>
       </CardActionArea>
     </Card>
   );
