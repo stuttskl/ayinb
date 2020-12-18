@@ -28,15 +28,6 @@ const useStyles = makeStyles({
 
 export default function BookCard(props) {
   const classes = useStyles();
-  const [state, setState] = useState({books: []})
-  function handleDelete(id) {
-    fetch(`http://localhost:8080/api/books/${id}`, 
-    {
-      method: 'delete'
-    });
-    const newBooks = state.books.filter(book => book._id !== id);
-    setState({books: newBooks})
-  }
   return (
     <Card className="book" id={props.id} borderTop={10}>
       <CardActionArea>
@@ -57,7 +48,7 @@ export default function BookCard(props) {
             <Rating name="read-only" value={props.rating} readOnly />
           </Box>
         </CardContent>
-        <Button onClick={() => handleDelete(props.id)}><DeleteIcon /></Button>
+        <Button onClick={props.onDelete}><DeleteIcon /></Button>
       </CardActionArea>
     </Card>
   );

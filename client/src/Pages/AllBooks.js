@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AllBooks.css';
+import Button from '@material-ui/core/Button';
 
 import BookCard from '../Components/BookCard';
 
@@ -23,27 +24,31 @@ function AllBooks(props) {
     )
   }, [])
 
-  // function handleDelete(id) {
-  //     fetch(`http://localhost:8080/api/books/${id}`, 
-  //     {
-  //       method: 'delete'
-  //     });
-  //     const newBooks = books.filter(book => book._id !== id);
-  //     setBooks({books: newBooks});
-  //   }
+  function deleteBook(id) {
+    fetch(`http://localhost:8080/api/books/${id}`, 
+    {
+      method: 'delete'
+    });
+    books.splice(id, 1); 
+    setBooks([...books]);
+    
+  }
   return (
     <>
       <h2>Your 2020 Shelf</h2>
       <div className="bookList">
-        {books.map((book) => (
+        {books.map((book, idx) => (
+          <>
           <BookCard 
+            key={idx}
             id={book._id}
             title={book.title}
             img={book.img}
             author={book.author}
             rating={book.rating}
-            // handleDelete={handleDelete(book.id)}
+            onDelete={deleteBook.bind(this, book._id)}
           />
+          </>
         ))}
       </div>
     </>
