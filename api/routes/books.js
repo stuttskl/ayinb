@@ -42,6 +42,15 @@ router.delete('/:bookId', (req, res) => {
     })
 });
 
+router.put('/:bookId', (req, res) => {
+  db.Book.findOneAndUpdate({_id: req.params.bookId}, req.body, {new:true})
+    .then(function(book) {
+      res.json(book);
+    })
+    .catch(function(err) {
+      res.send(err);
+    })
+});
 //TODO: update route
 
 module.exports = router;

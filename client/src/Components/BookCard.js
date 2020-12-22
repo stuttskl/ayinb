@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import DeleteIcon from '@material-ui/icons/Delete';
 import './BookCard.css';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,8 @@ const useStyles = makeStyles({
 
 export default function BookCard(props) {
   const classes = useStyles();
+  
+  // console.log(props.id)
   return (
     <Card className="book" id={props.id} borderTop={10}>
       <CardActionArea>
@@ -45,10 +48,16 @@ export default function BookCard(props) {
             {props.author}
           </Typography>
           <Box>
-            <Rating name="read-only" value={props.rating} readOnly />
+            <Rating 
+              name="controlled" 
+              value={props.rating}
+              onChange={props.updateRating}
+              // onUpdate={(event, newRating) => {updateRating(newRating)}}
+            />
           </Box>
         </CardContent>
         <Button onClick={props.onDelete}><DeleteIcon /></Button>
+        {/* <Button onClick={props.onUpdate}><EditIcon /></Button> */}
       </CardActionArea>
     </Card>
   );

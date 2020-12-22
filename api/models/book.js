@@ -14,7 +14,8 @@ var bookSchema = new mongoose.Schema({
     type: String
   },
   rating: {
-    type: Number
+    type: Number,
+    default: 0
   },
   startDate: {
     type: Date,

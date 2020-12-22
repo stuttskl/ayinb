@@ -8,6 +8,7 @@ function AllBooks(props) {
   const [books, setBooks] = useState([]);  
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [rating, setRating] = useState();
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/books/`)
@@ -29,10 +30,25 @@ function AllBooks(props) {
     {
       method: 'delete'
     });
-    books.splice(id, 1); 
-    setBooks([...books]);
-    
+    const newbooks = books.filter(book => book._id !== id);
+    setBooks([...newbooks])
   }
+
+  
+  function updateRating(newRating) {
+    // setRating(newRating);
+    console.log("inside of updating rating")
+    console.log(newRating)
+    fetch(`http://localhost:8080/api/books/${props.id}`, 
+    {
+      method: 'put',
+      headers: new Headers({
+       'Content-Type': 'application/json',
+      }),
+     body: JSON.stringify({rating: newRating})
+    });
+  }
+
   return (
     <>
       <h2>Your 2020 Shelf</h2>
@@ -45,8 +61,11 @@ function AllBooks(props) {
             title={book.title}
             img={book.img}
             author={book.author}
-            rating={book.rating}
+            rating={updateRating(book.rating)}
+            // rating={updateBook.bind(this, book._id)}
+            onToggle={updateRating(this, book._id)}
             onDelete={deleteBook.bind(this, book._id)}
+            // onUpdate={updateRating.bind(this, book._id)}
           />
           </>
         ))}
@@ -56,5 +75,3 @@ function AllBooks(props) {
 }
 
 export default AllBooks;
-
-// TODO: add loading and error rendering
