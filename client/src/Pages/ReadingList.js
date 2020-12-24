@@ -23,9 +23,10 @@ const useStyles = makeStyles(() => ({
     fontWeight: 600,
   },
   link: {
-    color: '#2281bb',
+    color: '#d50000',
     padding: '0 0.25rem',
     fontSize: '0.875rem',
+    textDecoration: 'none'
   },
   actions: {
     color: '#BDC9D7'
@@ -44,7 +45,7 @@ export const ReadingList = React.memo(function BookCard() {
         <Row wrap p={2} alignItems={'baseline'} className={styles.header}>
           <Item stretched className={styles.headline}>Your Reading List</Item>
           <Item className={styles.actions}>
-            <Link className={styles.link}><a href="/search">Add Book</a></Link> •{' '}
+            <Link><a href="/search" className={styles.link}>Add Book</a></Link> •{' '}
             <Link className={styles.link}>See all</Link>
           </Item>
         </Row>

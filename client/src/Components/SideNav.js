@@ -89,8 +89,10 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     alignItems: 'center',
+    color: '#d50000',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
+    textDecoration: 'none',
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
@@ -176,31 +178,31 @@ export default function MiniDrawer() {
         </div>
         <Divider />
           <List>
-            <Link to="/">
+            <Link className={classes.toolbar} to="/">
               <ListItem button key="Home">
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Home" />
               </ListItem>  
             </Link>
-            <Link to="/all">
+            <Link className={classes.toolbar} to="/all">
               <ListItem button key="All Books">
                 <ListItemIcon><MenuBookIcon /></ListItemIcon>
                 <ListItemText primary="All Books" />
               </ListItem> 
             </Link>
-            <Link to="/add">
+            <Link className={classes.toolbar} to="/add">
               <ListItem button key="Add a Book">
                 <ListItemIcon><AddIcon /></ListItemIcon>
                 <ListItemText primary="Add a Book" />
               </ListItem> 
             </Link>
-            <Link to="/readinglist">
+            <Link className={classes.toolbar} to="/readinglist">
               <ListItem button key="Reading List">
                 <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="Reading List" />
               </ListItem> 
             </Link>
-            <Link to="/search">
+            <Link className={classes.toolbar} to="/search">
               <ListItem button key="Search">
                 <ListItemIcon><SearchIcon /></ListItemIcon>
                 <ListItemText primary="Search" />

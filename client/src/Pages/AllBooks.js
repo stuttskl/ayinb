@@ -34,8 +34,7 @@ function AllBooks(props) {
     setBooks([...newbooks])
   }
 
-  
-  function updateRating(newRating) {
+  function toggleTodo(newRating) {
     // setRating(newRating);
     console.log("inside of updating rating in AllBooks")
     console.log("passed in rating is: ")
@@ -48,6 +47,8 @@ function AllBooks(props) {
       }),
      body: JSON.stringify({rating: newRating})
     });
+    // const newbooks = books.filter(book => book._id !== newRating.id);
+    // setBooks([...newbooks])
   }
 
   return (
@@ -57,14 +58,14 @@ function AllBooks(props) {
         {books.map((book, idx) => (
           <>
           <BookCard 
-            key={idx}
+            key={book._id}
             id={book._id}
             title={book.title}
             img={book.img}
             author={book.author}
-            rating={updateRating(book.rating)}
-            // rating={updateBook.bind(this, book._id)}
-            onToggle={updateRating(this, book._id)}
+            // rating={book.rating}
+            rating={toggleTodo.bind(this, book)}
+            // onToggle={toggleTodo(this, book._id)}
             onDelete={deleteBook.bind(this, book._id)}
             // onUpdate={updateRating.bind(this, book._id)}
           />

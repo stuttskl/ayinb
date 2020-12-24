@@ -49,13 +49,14 @@ export default function BookCard(props) {
             <Rating 
               name="controlled" 
               value={props.rating}
-              onChange={props.updateRating}
+              // onToggle={props.updateRating}
+              // onClick={props.onToggle}
               // onUpdate={(event, newRating) => {updateRating(newRating)}}
             />
           </Box>
         </CardContent>
         <Button onClick={props.onDelete}><DeleteIcon /></Button>
-        {/* <Button onClick={props.onUpdate}><EditIcon /></Button> */}
+        {/* <Button onClick={props.onToggle}><EditIcon /></Button> */}
       </CardActionArea>
     </Card>
   );
