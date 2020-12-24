@@ -32,8 +32,8 @@ export default function FormPropsTextFields() {
     validationSchema: validationSchema,
 
     onSubmit: (values) => {
-      console.log('inside of onsubmit')
-      console.log(values)
+      // console.log('inside of onsubmit')
+      // console.log(values)
       fetch('http://localhost:8080/api/books/', {
         method: 'post',
         headers: new Headers({

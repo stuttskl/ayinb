@@ -37,7 +37,7 @@ const BookItem = ({ id, src, title, author, desc }) => {
   const styles = useBookStyles();
   
   function confirmAdd() {
-    alert("Added to your shelf!");
+    alert("Added book to your shelf!");
   }
 
   const formik = useFormik({

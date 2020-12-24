@@ -37,7 +37,8 @@ function AllBooks(props) {
   
   function updateRating(newRating) {
     // setRating(newRating);
-    console.log("inside of updating rating")
+    console.log("inside of updating rating in AllBooks")
+    console.log("passed in rating is: ")
     console.log(newRating)
     fetch(`http://localhost:8080/api/books/${props.id}`, 
     {

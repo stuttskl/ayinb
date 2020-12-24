@@ -29,9 +29,7 @@ const useStyles = makeStyles({
 
 export default function BookCard(props) {
   const classes = useStyles();
-  
-  // console.log(props.id)
-  return (
+    return (
     <Card className="book" id={props.id} borderTop={10}>
       <CardActionArea>
         <CardMedia
@@ -40,7 +38,7 @@ export default function BookCard(props) {
           title=""
         />
         <CardContent className={classes.root}>
-          <p>{props.id}</p>
+          {/* <p>{props.id}</p> */}
           <Typography gutterBottom variant="p" component="h3">
             {props.title}
           </Typography>
