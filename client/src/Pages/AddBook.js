@@ -3,9 +3,9 @@ import AddForm from '../Components/AddForm';
 
 
 function Search() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(true);  
+  // const [data, setData] = useState([]);
+  const [error] = useState(null);
+  const [isLoaded] = useState(true);  
 
   if (error) {
     return <div>Error: {error.message} </div>;

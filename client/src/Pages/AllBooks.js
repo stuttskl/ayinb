@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AllBooks.css';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 
 import BookCard from '../Components/BookCard';
 
@@ -34,20 +34,20 @@ function AllBooks(props) {
     setBooks([...newbooks])
   }
 
-  function updateRating(newRating) {
-    // console.log(e.target.value)
-    // setRating(newRating);
+  function updateRating(e) {
     console.log("inside of updating rating in AllBooks")
-    console.log("passed in rating is: ")
-    console.log(newRating)
-    console.log(props.id)
-    fetch(`http://localhost:8080/api/books/${props.id}`, 
+    var newRating = e.target.value; // numerical rating 
+    console.log("new rating = " + newRating)
+    console.log(e)
+    var bookIdToUpdate = e.target.parentElement.id
+    console.log(e.target.parentElement.id)
+    fetch(`http://localhost:8080/api/books/${bookIdToUpdate}`,  // how to get this id?
     {
       method: 'put',
       headers: new Headers({
        'Content-Type': 'application/json',
       }),
-     body: JSON.stringify( {rating: newRating} )
+     body: JSON.stringify( {rating: newRating} ) // send as req.body 
     });
     // const newbooks = books.filter(book => book._id !== newRating.id);
     // setBooks([...newbooks])
@@ -57,7 +57,7 @@ function AllBooks(props) {
     <>
       <h2>Your 2020 Shelf</h2>
       <div className="bookList">
-        {books.map((book, idx) => (
+        {books.map((book, id) => (
           <>
           <BookCard 
             key={book._id}
@@ -65,7 +65,7 @@ function AllBooks(props) {
             title={book.title}
             img={book.img}
             author={book.author}
-            // rating={book.rating}
+            rating={book.rating} // uncomment this to render rating from db
             onDelete={deleteBook.bind(this, book._id)}
             onUpdate={updateRating.bind(this)}
           />

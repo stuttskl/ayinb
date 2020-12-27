@@ -43,8 +43,6 @@ router.delete('/:bookId', (req, res) => {
 });
 
 router.put('/:bookId', (req, res) => {
-  console.log("in put route")
-  console.log(bookId)
   db.Book.findOneAndUpdate({_id: req.params.bookId}, req.body, {new:true})
     .then(function(book) {
       res.json(book);
