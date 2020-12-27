@@ -49,8 +49,12 @@ function AllBooks(props) {
       }),
      body: JSON.stringify( {rating: newRating} ) // send as req.body 
     });
-    // const newbooks = books.filter(book => book._id !== newRating.id);
-    // setBooks([...newbooks])
+    const newbooks = books.map(t =>
+      (t._id === bookIdToUpdate) // if the id of the book matches the id of the book to update
+      ? {...t, rating: newRating} // using spread operator, set rating to new rating
+      : t // or just use all object data and vals
+      )
+    setBooks([...newbooks]) // lastly update and set new state
   }
 
   return (
