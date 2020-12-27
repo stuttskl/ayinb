@@ -47,16 +47,15 @@ export default function BookCard(props) {
           </Typography>
           <Box>
             <Rating 
-              name="controlled" 
               value={props.rating}
-              // onToggle={props.updateRating}
+              onUpdate={props.onUpdate}
               // onClick={props.onToggle}
-              // onUpdate={(event, newRating) => {updateRating(newRating)}}
+              // onUpdate={(event, newRating) => {props.updateRating(newRating)}}
             />
           </Box>
         </CardContent>
         <Button onClick={props.onDelete}><DeleteIcon /></Button>
-        {/* <Button onClick={props.onToggle}><EditIcon /></Button> */}
+        {/* <Button onClick={props.onUpdate}><EditIcon /></Button> */}
       </CardActionArea>
     </Card>
   );

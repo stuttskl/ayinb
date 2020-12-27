@@ -34,18 +34,20 @@ function AllBooks(props) {
     setBooks([...newbooks])
   }
 
-  function toggleTodo(newRating) {
+  function updateRating(newRating) {
+    // console.log(e.target.value)
     // setRating(newRating);
     console.log("inside of updating rating in AllBooks")
     console.log("passed in rating is: ")
     console.log(newRating)
+    console.log(props.id)
     fetch(`http://localhost:8080/api/books/${props.id}`, 
     {
       method: 'put',
       headers: new Headers({
        'Content-Type': 'application/json',
       }),
-     body: JSON.stringify({rating: newRating})
+     body: JSON.stringify( {rating: newRating} )
     });
     // const newbooks = books.filter(book => book._id !== newRating.id);
     // setBooks([...newbooks])
@@ -64,10 +66,8 @@ function AllBooks(props) {
             img={book.img}
             author={book.author}
             // rating={book.rating}
-            rating={toggleTodo.bind(this, book)}
-            // onToggle={toggleTodo(this, book._id)}
             onDelete={deleteBook.bind(this, book._id)}
-            // onUpdate={updateRating.bind(this, book._id)}
+            onUpdate={updateRating.bind(this)}
           />
           </>
         ))}
