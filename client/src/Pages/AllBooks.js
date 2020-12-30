@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './AllBooks.css';
-// import Button from '@material-ui/core/Button';
-
 import BookCard from '../Components/BookCard';
 
 function AllBooks(props) {
@@ -10,8 +8,11 @@ function AllBooks(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [rating, setRating] = useState();
 
+  let baseURL = "https://ayib-api.herokuapp.com/api/books/";
+  let localURL = "http://localhost:8080/api/books/";
+
   useEffect(() => {
-    fetch(`http://localhost:8080/api/books/`)
+    fetch(localURL)
       .then(res => res.json())
       .then(
         (result) => {
@@ -26,7 +27,7 @@ function AllBooks(props) {
   }, [])
 
   function deleteBook(id) {
-    fetch(`http://localhost:8080/api/books/${id}`, 
+    fetch(localURL + `${id}`, 
     {
       method: 'delete'
     });
@@ -35,19 +36,16 @@ function AllBooks(props) {
   }
 
   function updateRating(e) {
-    console.log("inside of updating rating in AllBooks")
-    var newRating = e.target.value; // numerical rating 
-    console.log("new rating = " + newRating)
-    console.log(e)
+    var newRating = e.target.value; 
     var bookIdToUpdate = e.target.parentElement.id
     console.log(e.target.parentElement.id)
-    fetch(`http://localhost:8080/api/books/${bookIdToUpdate}`,  // how to get this id?
+    fetch(localURL + `${bookIdToUpdate}`,
     {
       method: 'put',
       headers: new Headers({
        'Content-Type': 'application/json',
       }),
-     body: JSON.stringify( {rating: newRating} ) // send as req.body 
+     body: JSON.stringify( {rating: newRating} )
     });
     const newbooks = books.map(t =>
       (t._id === bookIdToUpdate) // if the id of the book matches the id of the book to update
@@ -57,7 +55,7 @@ function AllBooks(props) {
     setBooks([...newbooks]) // lastly update and set new state
   }
 
-  return (
+  return ( 
     <>
       <h2>Your 2020 Shelf</h2>
       <div className="bookList">
@@ -69,7 +67,7 @@ function AllBooks(props) {
             title={book.title}
             img={book.img}
             author={book.author}
-            rating={book.rating} // uncomment this to render rating from db
+            rating={book.rating}
             onDelete={deleteBook.bind(this, book._id)}
             onUpdate={updateRating.bind(this)}
           />
