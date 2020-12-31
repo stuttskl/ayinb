@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CurrentBook from '../Components/CurrentBook';
 
+let localURL = "http://localhost:8080/api/books/";
+
 function Home() {
   const [currentBook, setCurrentBook] = useState([]);
   const [error, setError] = useState(null);
@@ -21,8 +23,17 @@ function Home() {
     )
   }, [])
 
-  function updateProgress(e) {
-    console.log("inside of update progress!")
+  function setFinished(e) {
+    var bookIdToUpdate = e;
+    var currentStatus = "no";
+    fetch(localURL + `${bookIdToUpdate}`,
+    {
+      method: 'put',
+      headers: new Headers({
+       'Content-Type': 'application/json',
+      }),
+     body: JSON.stringify( {current: currentStatus} )
+    });
   }
   
   return (
@@ -31,11 +42,12 @@ function Home() {
       {currentBook.map((field) => (
         <CurrentBook 
           key={field._id}
+          id={field._id}
           title={field.title === undefined ? "No current book, get to reading!" : field.title}
           img={field.img}
           author={field.author}
           desc={field.desc === undefined ? "No book description" : field.desc}
-          onUpdate={updateProgress}
+          onCompleted={setFinished.bind(this, field._id)}
         />
       ))}
       

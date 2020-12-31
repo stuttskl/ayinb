@@ -108,12 +108,14 @@ export default function CurrentBookCard(props) {
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Update Your Progress</h2>
       <p id="simple-modal-description">
+        Currently on
         <TextField 
           id="currentPage"
           name="currentPage"
           value={formik.values.currentPage}
           onChange={formik.handleChange}
         />
+        of 
       </p>
       <Modal />
     </div>
@@ -127,12 +129,13 @@ export default function CurrentBookCard(props) {
         title={props.title}
         subheader={props.author}
       />
+      <Button onClick={props.onCompleted}>I'm finished!</Button>
       <CardMedia
         className={classes.media}
         image={props.img}
         title="Book Cover"
       />
-      <CircularProgress />
+      {/* <CircularProgress />
       <Button onClick={handleOpen}>Update Progress</Button>
       <Modal
         open={open}
@@ -141,7 +144,7 @@ export default function CurrentBookCard(props) {
         aria-describedby="simple-modal-description"
       >
         {body}
-      </Modal>
+      </Modal> */}
       <CardActions disableSpacing>
         Book Description
         <IconButton
