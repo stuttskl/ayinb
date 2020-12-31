@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../models');
 
 router.get('/', (req, res) => {
-  db.Book.find()
+  db.Book.find({"current": false})
     .then(function(books) {
       res.json(books);
     })

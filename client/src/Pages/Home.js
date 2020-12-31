@@ -27,7 +27,7 @@ function Home() {
       {currentBook.map((field) => (
         <CurrentBook 
           key={field._id}
-          title={field.title}
+          title={field.title === undefined ? "No current book, get to reading!" : field.title}
           img={field.img}
           author={field.author}
           desc={field.desc === undefined ? "No book description" : field.desc}
