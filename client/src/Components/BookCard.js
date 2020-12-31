@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 export default function BookCard(props) {
   const classes = useStyles();
     return (
-    <Card className="book" id={props.id} borderTop={10}>
+    <Card className="book" id={props.id} bordertop={10}>
       <CardActionArea>
         <CardMedia
           className={classes.media}

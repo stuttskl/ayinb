@@ -47,10 +47,10 @@ function AllBooks(props) {
       }),
      body: JSON.stringify( {rating: newRating} )
     });
-    const newbooks = books.map(t =>
-      (t._id === bookIdToUpdate) // if the id of the book matches the id of the book to update
-      ? {...t, rating: newRating} // using spread operator, set rating to new rating
-      : t // or just use all object data and vals
+    const newbooks = books.map(book =>
+      (book._id === bookIdToUpdate) // if the id of the book matches the id of the book to update
+      ? {...book, rating: newRating} // using spread operator, set rating to new rating
+      : book // or just use all object data and vals
       )
     setBooks([...newbooks]) // lastly update and set new state
   }
@@ -61,16 +61,16 @@ function AllBooks(props) {
       <div className="bookList">
         {books.map((book, id) => (
           <>
-          <BookCard 
-            key={book._id}
-            id={book._id}
-            title={book.title}
-            img={book.img}
-            author={book.author}
-            rating={book.rating}
-            onDelete={deleteBook.bind(this, book._id)}
-            onUpdate={updateRating.bind(this)}
-          />
+            <BookCard 
+              key={book._id}
+              id={book._id}
+              title={book.title}
+              img={book.img}
+              author={book.author}
+              rating={book.rating}
+              onDelete={deleteBook.bind(this, book._id)}
+              onUpdate={updateRating.bind(this)}
+            />
           </>
         ))}
       </div>

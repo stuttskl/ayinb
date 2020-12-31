@@ -93,34 +93,34 @@ export default function SearchForm() {
   } else {
     toRender = 
     <>
-    <div className="container">
-      <h1>Search for a Book</h1>
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="query"
-            name="query"
-            label="Enter another search term..."
-            value={formik.values.query}
-            onChange={formik.handleChange}
-          />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
-        </form>
-    </div>
+      <div className="container">
+        <h1>Search for a Book</h1>
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              id="query"
+              name="query"
+              label="Enter another search term..."
+              value={formik.values.query}
+              onChange={formik.handleChange}
+            />
+            <Button color="primary" variant="contained" fullWidth type="submit">
+              Submit
+            </Button>
+          </form>
+      </div>
       <Column p={0} gap={0} className={styles.card}>
         {data.map(item => (
           <BookItem 
             id={item.id}
             title={item.volumeInfo.title} 
             author={item.volumeInfo.authors} 
-            src={item.volumeInfo.imageLinks === undefined ? "" : item.volumeInfo.imageLinks.thumbnail}
+            src={item.volumeInfo.imageLinks === undefined ? "" : item.volumeInfo.imageLinks.thumbnail} // if no img associated with book, don't display any img
             desc={item.volumeInfo.description} // TODO: fix desc so that it wraps
           />
         ))}
       </Column>
-      </>
+    </>
   }
   return toRender;
 };
