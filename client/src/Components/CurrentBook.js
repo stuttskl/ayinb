@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function CurrentBookCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -39,21 +39,21 @@ export default function RecipeReviewCard() {
     setExpanded(!expanded);
   };
 
-  const [title] = useState("Harry Potter and the Order of the Phoenix")
-  const [author] = useState("JK Rowling")
-  const [img] = useState("https://images-na.ssl-images-amazon.com/images/I/71xcuT33RpL._AC_SY879_.jpg")
-  const [desc] = useState("'You are sharing the Dark Lord's thoughts and emotions. The Headmaster thinks it inadvisable for this to continue. He wishes me to teach you how to close your mind to the Dark Lord.' Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time...")
+  // const [title] = useState("Harry Potter and the Order of the Phoenix")
+  // const [author] = useState("JK Rowling")
+  // const [img] = useState("https://images-na.ssl-images-amazon.com/images/I/71xcuT33RpL._AC_SY879_.jpg")
+  // const [desc] = useState("'You are sharing the Dark Lord's thoughts and emotions. The Headmaster thinks it inadvisable for this to continue. He wishes me to teach you how to close your mind to the Dark Lord.' Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time...")
 
   return (
     <>
     <Card className={classes.root}>
       <CardHeader
-        title={title}
-        subheader={author}
+        title={props.title}
+        subheader={props.author}
       />
       <CardMedia
         className={classes.media}
-        image={img}
+        image={props.img}
         title="Book Cover"
       />
       <CardActions disableSpacing>
@@ -72,7 +72,7 @@ export default function RecipeReviewCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {desc}
+            {props.desc}
           </Typography>
         </CardContent>
       </Collapse>
