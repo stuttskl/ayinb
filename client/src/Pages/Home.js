@@ -20,6 +20,10 @@ function Home() {
       }
     )
   }, [])
+
+  function updateProgress(e) {
+    console.log("inside of update progress!")
+  }
   
   return (
     <div>
@@ -31,6 +35,7 @@ function Home() {
           img={field.img}
           author={field.author}
           desc={field.desc === undefined ? "No book description" : field.desc}
+          onUpdate={updateProgress}
         />
       ))}
       
