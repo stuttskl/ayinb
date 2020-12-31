@@ -12,6 +12,16 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/current', (req, res) => {
+  db.Book.find({"current": true})
+    .then(function(books) {
+      res.json(books);
+    })
+    .catch(function(err) {
+      res.send(err);
+    })
+});
+
 router.post('/', (req, res) => {
   db.Book.create(req.body)
     .then(function(newBook) {
