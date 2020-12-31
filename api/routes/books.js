@@ -3,7 +3,17 @@ var router = express.Router();
 var db = require('../models');
 
 router.get('/', (req, res) => {
-  db.Book.find()
+  db.Book.find({"current": false})
+    .then(function(books) {
+      res.json(books);
+    })
+    .catch(function(err) {
+      res.send(err);
+    })
+});
+
+router.get('/current', (req, res) => {
+  db.Book.find({"current": true})
     .then(function(books) {
       res.json(books);
     })
