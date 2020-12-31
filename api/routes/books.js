@@ -32,6 +32,16 @@ router.post('/', (req, res) => {
     })
 });
 
+// router.post('/newCurrent', (req, res) => {
+//   db.Book.create(req.body)
+//     .then(function(newBook) {
+//       res.status(201).res.json(newBook);
+//     })
+//     .catch(function(err) {
+//       res.send(err);
+//     })
+// });
+
 router.get('/:bookId', (req, res) => {
   db.Book.findById(req.params.bookId)
     .then(function(book) {
@@ -61,15 +71,5 @@ router.put('/:bookId', (req, res) => {
       res.send(err);
     })
 });
-
-// router.put('/setCurrent/:bookId', (req, res) => {
-//   db.Book.findOneAndUpdate({_id: req.params.bookId}, req.body, {new:true})
-//     .then(function(book) {
-//       res.json(book);
-//     })
-//     .catch(function(err) {
-//       res.send(err);
-//     })
-// });
 
 module.exports = router;

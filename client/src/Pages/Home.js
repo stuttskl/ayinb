@@ -22,7 +22,7 @@ function Home() {
       }
     )
   }, [])
-
+  // sets current book status to "no", removes from home page and adds to shelf
   function setFinished(e) {
     var bookIdToUpdate = e;
     var currentStatus = "no";
@@ -35,7 +35,6 @@ function Home() {
      body: JSON.stringify( {current: currentStatus} )
     });
   }
-  
   return (
     <div>
       <h2>Currently Reading</h2>
@@ -50,7 +49,6 @@ function Home() {
           onCompleted={setFinished.bind(this, field._id)}
         />
       ))}
-      
     </div>
   );
 }

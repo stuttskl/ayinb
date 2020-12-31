@@ -1,8 +1,14 @@
 import React from 'react';
-import { useFormik, Field, FormikProvider } from 'formik';
+import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Typography } from '@material-ui/core';
+
+import SearchFormCurrent from './SearchForCurrent';
 import './AddForm.css';
 
 const validationSchema = yup.object({
@@ -44,7 +50,6 @@ export default function FormPropsTextFields() {
   });
   return (
     <div className="container">
-      <FormikProvider value={formik}>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -109,22 +114,21 @@ export default function FormPropsTextFields() {
             shrink: true,
           }}
         />
-        <div id="currently-reading">Currently Reading?</div>
-        <div role="group" aria-labelledby="currently-reading">
-          <label>
-            <Field type="radio" name="current" value="yes" />
-            Yes
-          </label>
-          <label>
-            <Field type="radio" name="current" value="no" />
-            No
-          </label>
-        </div>
+        <Typography>Currently Reading?</Typography>
+        <RadioGroup 
+          aria-label="currentlyReading" 
+          name="current" 
+          value={formik.values.current} 
+          onChange={formik.handleChange}
+        >
+          <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+          <FormControlLabel value="no" control={<Radio />} label="No" />
+        </RadioGroup>
         <Button color="primary" variant="contained" type="submit">
-          Submit
+          Add Book
         </Button>
       </form>
-      </FormikProvider>
+      <SearchFormCurrent />
     </div>
   );
 };

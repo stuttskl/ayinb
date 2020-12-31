@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import BookItem from '../Components/BookItem';
+import CurrentBookItem from '../Components/CurrentBookItem';
 import './SearchForm.css';
 
 const useStyles = makeStyles(() => ({
@@ -111,7 +111,7 @@ export default function SearchForm() {
       </div>
       <Column p={0} gap={0} className={styles.card}>
         {data.map(item => (
-          <BookItem 
+          <CurrentBookItem 
             id={item.id}
             title={item.volumeInfo.title} 
             author={item.volumeInfo.authors} 
