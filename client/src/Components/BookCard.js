@@ -9,6 +9,7 @@ import Rating from '@material-ui/lab/Rating';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import DeleteIcon from '@material-ui/icons/Delete';
+import GradeIcon from '@material-ui/icons/Grade';
 import './BookCard.css';
 
 const useStyles = makeStyles({
@@ -52,6 +53,7 @@ export default function BookCard(props) {
           </Box>
         </CardContent>
         <Button onClick={props.onDelete}><DeleteIcon /></Button>
+        {/* <Button id={props.id} name={props.id} onClick={props.onSetCurrent} value={"yes"}><GradeIcon /></Button> */}
       </CardActionArea>
     </Card>
   );

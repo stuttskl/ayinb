@@ -13,7 +13,7 @@ function Search() {
   } else {
     return (
       <>
-      <SearchForm />
+        <SearchForm />
       </>
     )
   }

@@ -25,8 +25,8 @@ var bookSchema = new mongoose.Schema({
     type: Date
   },
   current: {
-    type: Boolean,
-    default: false
+    type: String,
+    default: "no"
   }
 });
 

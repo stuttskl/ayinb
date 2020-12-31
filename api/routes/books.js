@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../models');
 
 router.get('/', (req, res) => {
-  db.Book.find({"current": false})
+  db.Book.find({"current": "no"})
     .then(function(books) {
       res.json(books);
     })
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/current', (req, res) => {
-  db.Book.find({"current": true})
+  db.Book.find({"current": "yes"})
     .then(function(books) {
       res.json(books);
     })
@@ -61,5 +61,15 @@ router.put('/:bookId', (req, res) => {
       res.send(err);
     })
 });
+
+// router.put('/setCurrent/:bookId', (req, res) => {
+//   db.Book.findOneAndUpdate({_id: req.params.bookId}, req.body, {new:true})
+//     .then(function(book) {
+//       res.json(book);
+//     })
+//     .catch(function(err) {
+//       res.send(err);
+//     })
+// });
 
 module.exports = router;
