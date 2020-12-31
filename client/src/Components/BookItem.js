@@ -32,7 +32,7 @@ const useBookStyles = makeStyles(() => ({
   },
 }));
 
-const BookItem = ({ id, src, title, author, desc }) => {
+const BookItem = ({ id, src, title, author, desc, current }) => {
   const avatarStyles = useDynamicAvatarStyles({ size: 70 });
   const styles = useBookStyles();
   
@@ -46,6 +46,7 @@ const BookItem = ({ id, src, title, author, desc }) => {
       author: author,
       desc: desc,
       img: src,
+      current: current
     },
     onSubmit: (values) => {
       fetch('http://localhost:8080/api/books/', {
@@ -54,7 +55,10 @@ const BookItem = ({ id, src, title, author, desc }) => {
           'Content-Type': 'application/json',
         }),
         body: JSON.stringify(values)
-      });
+      })
+      // .then(() => {
+      //   console.log(values)
+      // })
     },
   });
   return (

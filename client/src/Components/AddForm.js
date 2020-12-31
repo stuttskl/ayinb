@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { useFormik, Field, FormikProvider } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -27,13 +27,12 @@ export default function FormPropsTextFields() {
       img: '',
       rating: 0,
       startDate: '',
-      endDate: ''
+      endDate: '',
+      current: ''
     },
     validationSchema: validationSchema,
 
     onSubmit: (values) => {
-      // console.log('inside of onsubmit')
-      // console.log(values)
       fetch('http://localhost:8080/api/books/', {
         method: 'post',
         headers: new Headers({
@@ -45,6 +44,7 @@ export default function FormPropsTextFields() {
   });
   return (
     <div className="container">
+      <FormikProvider value={formik}>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -109,10 +109,22 @@ export default function FormPropsTextFields() {
             shrink: true,
           }}
         />
+        <div id="currently-reading">Currently Reading?</div>
+        <div role="group" aria-labelledby="currently-reading">
+          <label>
+            <Field type="radio" name="current" value="yes" />
+            Yes
+          </label>
+          <label>
+            <Field type="radio" name="current" value="no" />
+            No
+          </label>
+        </div>
         <Button color="primary" variant="contained" type="submit">
           Submit
         </Button>
       </form>
+      </FormikProvider>
     </div>
   );
 };

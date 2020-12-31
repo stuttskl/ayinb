@@ -27,6 +27,7 @@ function AllBooks(props) {
   }, [])
 
   function deleteBook(id) {
+    console.log("inside of delete book")
     fetch(localURL + `${id}`, 
     {
       method: 'delete'
@@ -36,9 +37,9 @@ function AllBooks(props) {
   }
 
   function updateRating(e) {
+    console.log("inside of update rating")
     var newRating = e.target.value; 
-    var bookIdToUpdate = e.target.parentElement.id
-    console.log(e.target.parentElement.id)
+    var bookIdToUpdate = e.target.parentElement.id;
     fetch(localURL + `${bookIdToUpdate}`,
     {
       method: 'put',
@@ -48,12 +49,27 @@ function AllBooks(props) {
      body: JSON.stringify( {rating: newRating} )
     });
     const newbooks = books.map(book =>
-      (book._id === bookIdToUpdate) // if the id of the book matches the id of the book to update
-      ? {...book, rating: newRating} // using spread operator, set rating to new rating
-      : book // or just use all object data and vals
-      )
-    setBooks([...newbooks]) // lastly update and set new state
+      (book._id === bookIdToUpdate) ? {...book, rating: newRating} : book)
+      setBooks([...newbooks]) 
   }
+
+  // function setCurrentBook(e) {
+  //   console.log(e.target.parentElement.offsetParent.name)
+  //   var bookIdToUpdate = e.target.parentElement.offsetParent;
+  //   var currentStatus = "yes";
+  //   fetch(localURL + `${bookIdToUpdate}`,
+  //   {
+  //     method: 'put',
+  //     headers: new Headers({
+  //      'Content-Type': 'application/json',
+  //     }),
+  //    body: JSON.stringify( {current: currentStatus} )
+  //   });
+  //   const newbooks = books.map(book =>
+  //     (book._id === bookIdToUpdate) ? {...book, current: currentStatus} : book)
+  //     setBooks([...newbooks]
+  //   ) 
+  // }
 
   return ( 
     <>
@@ -69,6 +85,7 @@ function AllBooks(props) {
               author={book.author}
               rating={book.rating}
               onDelete={deleteBook.bind(this, book._id)}
+              // onSetCurrent={setCurrentBook.bind(this)}
               onUpdate={updateRating.bind(this)}
             />
           </>

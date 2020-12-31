@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import AddForm from '../Components/AddForm';
 
-
 function Search() {
   // const [data, setData] = useState([]);
   const [error] = useState(null);
