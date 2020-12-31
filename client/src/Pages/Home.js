@@ -30,7 +30,7 @@ function Home() {
           title={field.title}
           img={field.img}
           author={field.author}
-          desc={field.desc === undefined ? "No book description" : "No book description"}
+          desc={field.desc === undefined ? "No book description" : field.desc}
         />
       ))}
       
