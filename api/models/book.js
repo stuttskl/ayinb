@@ -24,6 +24,9 @@ var bookSchema = new mongoose.Schema({
   endDate: {
     type: Date
   },
+  pageCount: {
+    type: Number
+  },
   current: {
     type: String,
     default: "no"

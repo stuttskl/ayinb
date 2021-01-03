@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
     })
 });
 
-// router.post('/newCurrent', (req, res) => {
+// router.post('/new', (req, res) => {
 //   db.Book.create(req.body)
 //     .then(function(newBook) {
 //       res.status(201).res.json(newBook);

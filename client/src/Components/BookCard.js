@@ -37,6 +37,7 @@ export default function BookCard(props) {
           image={props.img}
           title=""
         />
+        {/* <p>{props.pageCount}</p> */}
         <CardContent className={classes.root}>
           <Typography gutterBottom variant="p" component="h3">
             {props.title}

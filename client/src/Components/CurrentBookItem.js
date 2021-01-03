@@ -32,7 +32,7 @@ const useBookStyles = makeStyles(() => ({
   },
 }));
 
-const CurrentBookItem = ({ id, src, title, author, desc }) => {
+const CurrentBookItem = ({ id, src, title, author, desc, pageCount }) => {
   const avatarStyles = useDynamicAvatarStyles({ size: 70 });
   const styles = useBookStyles();
   
@@ -46,7 +46,8 @@ const CurrentBookItem = ({ id, src, title, author, desc }) => {
       author: author,
       desc: desc,
       img: src,
-      current: "yes"
+      current: "yes",
+      pageCount: pageCount
     },
     onSubmit: (values) => {
       // alert('Currently Reading?');

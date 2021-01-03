@@ -83,6 +83,7 @@ function AllBooks(props) {
               id={book._id}
               title={book.title}
               img={book.img}
+              pageCount={book.pageCount}
               author={book.author}
               rating={book.rating}
               onDelete={deleteBook.bind(this, book._id)}

@@ -56,7 +56,7 @@ export default function SearchForm() {
     validationSchema: validationSchema,
     onSubmit: (query) => {
       query = query["query"]
-      fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=20`)
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=40`)
         .then(res => res.json())
         .then(
           (result) => {
@@ -117,6 +117,7 @@ export default function SearchForm() {
             author={item.volumeInfo.authors} 
             src={item.volumeInfo.imageLinks === undefined ? "" : item.volumeInfo.imageLinks.thumbnail} // if no img associated with book, don't display any img
             desc={item.volumeInfo.description} // TODO: fix desc so that it wraps
+            pageCount={item.volumeInfo.pageCount}
           />
         ))}
       </Column>

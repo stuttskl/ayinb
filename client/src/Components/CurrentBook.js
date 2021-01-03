@@ -116,8 +116,9 @@ export default function CurrentBookCard(props) {
           value={formik.values.currentPage}
           onChange={formik.handleChange}
         />
-        of 
+        of {props.pageCount}
       </p>
+      <Button color="primary" onClick={handleClose}>Ok</Button>
       <Modal />
     </div>
   );
@@ -135,7 +136,9 @@ export default function CurrentBookCard(props) {
         image={props.img}
         title="Book Cover"
       />
-      {/* <CircularProgress />
+      <CircularProgress
+        progress={currentPage} 
+      />
       <Button onClick={handleOpen}>Update Progress</Button>
       <Modal
         open={open}
@@ -144,7 +147,7 @@ export default function CurrentBookCard(props) {
         aria-describedby="simple-modal-description"
       >
         {body}
-      </Modal> */}
+      </Modal> 
       <CardActions disableSpacing>
         Book Description
         <IconButton
@@ -155,7 +158,7 @@ export default function CurrentBookCard(props) {
           aria-expanded={expanded}
           aria-label="show more"
         >
-          <ExpandMoreIcon />
+        <ExpandMoreIcon />
         </IconButton>
         <Button color="primary" variant="contained" onClick={props.onCompleted}>I'm finished!</Button>
       </CardActions>

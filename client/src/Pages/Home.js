@@ -46,6 +46,7 @@ function Home() {
           img={field.img}
           author={field.author}
           desc={field.desc === undefined ? "No book description" : field.desc}
+          pageCount={field.pageCount}
           onCompleted={setFinished.bind(this, field._id)}
         />
       ))}
