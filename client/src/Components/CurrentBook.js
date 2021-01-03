@@ -17,10 +17,12 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
 
+let localURL = "http://localhost:8080/api/books/";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 280,
   },
   media: {
     height: 0,
@@ -70,14 +72,34 @@ export default function CurrentBookCard(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentPage, setCurrentPage] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState();
+
+
+
 
   const formik = useFormik({
     initialValues: {
       currentPage: ''
     },
-    onSubmit: (currentPage) => {
-      fetch(``)
+    handleChange: (e) => {
+      const target = e.target;
+      setCurrentPage(target);
+    },
+    onSubmit: (e) => {
+      handleClose();
+      let currentPage = e.currentPage;
+      console.log(currentPage);
+
+      var bookIdToUpdate = props.id;
+      
+      fetch(localURL + `${bookIdToUpdate}`, 
+        {
+          method: 'put',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+          }),
+          body: JSON.stringify( {currentPage: currentPage} )
+      })
         .then(res => res.json())
         .then(
           (currentPage) => {
@@ -90,7 +112,9 @@ export default function CurrentBookCard(props) {
           }
         )
     },
+    
   });
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -103,7 +127,6 @@ export default function CurrentBookCard(props) {
     setExpanded(!expanded);
   };
 
-  
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -113,17 +136,15 @@ export default function CurrentBookCard(props) {
         <TextField 
           id="currentPage"
           name="currentPage"
-          value={formik.values.currentPage}
+          value={currentPage} 
           onChange={formik.handleChange}
         />
         of {props.pageCount}
       </p>
-      <Button color="primary" onClick={handleClose}>Ok</Button>
+      <Button color="primary" onClick={formik.handleSubmit}>Ok</Button>
       <Modal />
     </div>
   );
-
-  
   return (
     <>
     <Card className={classes.root}>
@@ -136,8 +157,10 @@ export default function CurrentBookCard(props) {
         image={props.img}
         title="Book Cover"
       />
+      {/* <p>{props.currentPage}</p> */}
       <CircularProgress
-        progress={currentPage} 
+        value={props.currentPage}
+        totalPages={props.pageCount}
       />
       <Button onClick={handleOpen}>Update Progress</Button>
       <Modal

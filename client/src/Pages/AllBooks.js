@@ -54,27 +54,9 @@ function AllBooks(props) {
       setBooks([...newbooks]) 
   }
 
-  // function setCurrentBook(e) {
-  //   console.log(e.target.parentElement.offsetParent.name)
-  //   var bookIdToUpdate = e.target.parentElement.offsetParent;
-  //   var currentStatus = "yes";
-  //   fetch(localURL + `${bookIdToUpdate}`,
-  //   {
-  //     method: 'put',
-  //     headers: new Headers({
-  //      'Content-Type': 'application/json',
-  //     }),
-  //    body: JSON.stringify( {current: currentStatus} )
-  //   });
-  //   const newbooks = books.map(book =>
-  //     (book._id === bookIdToUpdate) ? {...book, current: currentStatus} : book)
-  //     setBooks([...newbooks]
-  //   ) 
-  // }
-
   return ( 
     <>
-      <h2>Your 2020 Shelf</h2>
+      <h2>Your Shelf</h2>
       <div className="bookList">
         {books.map((book, id) => (
           <>
@@ -87,7 +69,6 @@ function AllBooks(props) {
               author={book.author}
               rating={book.rating}
               onDelete={deleteBook.bind(this, book._id)}
-              // onSetCurrent={setCurrentBook.bind(this)}
               onUpdate={updateRating.bind(this)}
             />
           </>

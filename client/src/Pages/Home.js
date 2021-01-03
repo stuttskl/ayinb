@@ -15,6 +15,7 @@ function Home() {
         (result) => {
           setIsLoaded(true);
           setCurrentBook(result);
+          console.log(result)
       },
       (error) => {
         setIsLoaded(true);
@@ -47,6 +48,7 @@ function Home() {
           author={field.author}
           desc={field.desc === undefined ? "No book description" : field.desc}
           pageCount={field.pageCount}
+          currentPage={field.currentPage}
           onCompleted={setFinished.bind(this, field._id)}
         />
       ))}

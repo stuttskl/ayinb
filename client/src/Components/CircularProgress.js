@@ -4,14 +4,25 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-function CircularProgressWithLabel(props) {
+ export default function CircularProgressWithLabel(props) {
+  const [progress, setProgress] = React.useState(0);
+  console.log(props)
+  console.log("props.value: " + props.value)
+  console.log("props.totalPages: " + props.totalPages)
+  let progressPercentage = (props.value / props.totalPages) * 100;
+  console.log("progress percentage: " + progressPercentage);
+
+  React.useEffect(() => {
+    setProgress(progressPercentage);
+  }, []);
+
   return (
     <Box position="relative" display="inline-flex">
       <CircularProgress 
         size={80} 
         variant="determinate" 
         thickness={1.5}
-        {...props} 
+        value={progress}
       />
       <Box
         top={0}
@@ -24,32 +35,9 @@ function CircularProgressWithLabel(props) {
         justifyContent="center"
       >
         <Typography variant="caption" component="div" color="textSecondary">
-          {` ${Math.round(props.value,)} %`}
+          {` ${Math.round(progressPercentage.toFixed())}.%`}
         </Typography>
       </Box>
     </Box>
   );
-}
-
-CircularProgressWithLabel.propTypes = {
-  /**
-   * The value of the progress indicator for the determinate variant.
-   * Value between 0 and 100.
-   */
-  value: PropTypes.number.isRequired,
-};
-
-export default function CircularStatic() {
-  const [progress, setProgress] = React.useState(0);
-  // setProgress(50);
-  // React.useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-  //   }, 800);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-
-  return <CircularProgressWithLabel value={progress} />;
 }
