@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { useFormik } from 'formik';
+import { useFormik, enableReinitialize } from 'formik';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -16,9 +16,7 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
-
 let localURL = "http://localhost:8080/api/books/";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,58 +73,51 @@ export default function CurrentBookCard(props) {
   const [currentPage, setCurrentPage] = React.useState();
 
 
-
+  // useEffect(() => {
+  //   console.log('mounted')
+  // }, [props.currentPage]);
 
   const formik = useFormik({
     initialValues: {
       currentPage: ''
     },
-    handleChange: (e) => {
-      const target = e.target;
-      setCurrentPage(target);
-    },
+    // handleChange: (e) => {
+    //   console.log("inside of handle change current page")
+    //   const target = e.target;
+    //   setCurrentPage(target);
+    // },
     onSubmit: (e) => {
       handleClose();
       let currentPage = e.currentPage;
-      console.log(currentPage);
-
-      var bookIdToUpdate = props.id;
+      let bookIdToUpdate = props.id;
       
       fetch(localURL + `${bookIdToUpdate}`, 
-        {
-          method: 'put',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-          }),
-          body: JSON.stringify( {currentPage: currentPage} )
+      {
+        method: 'put',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify( {currentPage: currentPage} )
       })
-        .then(res => res.json())
-        .then(
-          (currentPage) => {
-            setIsLoaded(true);
-            setCurrentPage(currentPage);
-          },
-          (error) => {
-            setIsLoaded(false);
-            setError(error);
-          }
-        )
+      .then(res => res.json())
+      .then(
+        (currentPage) => {
+          setIsLoaded(true);
+          setCurrentPage(currentPage);
+        },
+        (error) => {
+          setIsLoaded(false);
+          setError(error);
+        }
+      )
     },
-    
   });
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const handleOpen = () => { setOpen(true); };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => { setOpen(false); };
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+  const handleExpandClick = () => { setExpanded(!expanded); };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -138,6 +129,7 @@ export default function CurrentBookCard(props) {
           name="currentPage"
           value={currentPage} 
           onChange={formik.handleChange}
+          enableReinitialize={true}
         />
         of {props.pageCount}
       </p>
@@ -157,7 +149,6 @@ export default function CurrentBookCard(props) {
         image={props.img}
         title="Book Cover"
       />
-      {/* <p>{props.currentPage}</p> */}
       <CircularProgress
         value={props.currentPage}
         totalPages={props.pageCount}

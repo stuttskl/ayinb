@@ -6,15 +6,15 @@ import Box from '@material-ui/core/Box';
 
  export default function CircularProgressWithLabel(props) {
   const [progress, setProgress] = React.useState(0);
-  console.log(props)
-  console.log("props.value: " + props.value)
-  console.log("props.totalPages: " + props.totalPages)
+  // console.log(props)
+  // console.log("props.value: " + props.value)
+  // console.log("props.totalPages: " + props.totalPages)
   let progressPercentage = (props.value / props.totalPages) * 100;
-  console.log("progress percentage: " + progressPercentage);
+  // console.log("progress percentage: " + progressPercentage);
 
   React.useEffect(() => {
     setProgress(progressPercentage);
-  }, []);
+  }, [progress]);
 
   return (
     <Box position="relative" display="inline-flex">
