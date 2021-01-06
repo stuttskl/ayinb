@@ -125,3 +125,6 @@ export default function SearchForm() {
   }
   return toRender;
 };
+
+// TODO:
+// [] fix issue of needing to refresh between searches or else wrong book is added

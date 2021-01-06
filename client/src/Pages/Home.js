@@ -23,6 +23,7 @@ function Home() {
       }
     )
   }, [])
+
   // sets current book status to "no", removes from home page and adds to shelf
   function setFinished(e) {
     var bookIdToUpdate = e;
@@ -35,7 +36,11 @@ function Home() {
       }),
      body: JSON.stringify( {current: currentStatus} )
     });
+    currentBook.map(book =>
+      (book._id === bookIdToUpdate) ? {...book} : book) // I think this can be modified
+      setCurrentBook([]) 
   }
+
   return (
     <div>
       <h2>Currently Reading</h2>

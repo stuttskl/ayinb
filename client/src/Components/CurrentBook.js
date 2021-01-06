@@ -193,3 +193,7 @@ export default function CurrentBookCard(props) {
     </>
   );
 }
+
+// TODO:
+// [] resize/fix image on highlight book
+// [] style UPDATE PROGRESS button

@@ -41,3 +41,6 @@ import Box from '@material-ui/core/Box';
     </Box>
   );
 }
+
+// TODO: 
+// [] remove . from percentage
