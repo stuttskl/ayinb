@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { useFormik, enableReinitialize } from 'formik';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -61,6 +62,10 @@ function getModalStyle() {
   };
 }
 
+const validationSchema = Yup.object().shape({
+  currentPage: Yup.number()
+  .required('Current page required!'),
+});
 
 export default function CurrentBookCard(props) {
   
@@ -81,6 +86,7 @@ export default function CurrentBookCard(props) {
     initialValues: {
       currentPage: ''
     },
+    validationSchema: validationSchema,
     // handleChange: (e) => {
     //   console.log("inside of handle change current page")
     //   const target = e.target;
