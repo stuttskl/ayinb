@@ -85,27 +85,11 @@ export default function CurrentBookCard(props) {
     onSubmit: (e) => {
       handleClose();
       // let currentPage = e.currentPage;
-      // let bookIdToUpdate = props.id;
+      let bookIdToUpdate = props.id;
       props.onUpdatePage(e, currentPage)
-      // fetch(localURL + `${bookIdToUpdate}`, 
-      // {
-      //   method: 'put',
-      //   headers: new Headers({
-      //     'Content-Type': 'application/json',
-      //   }),
-      //   body: JSON.stringify( {currentPage: currentPage} )
-      // })
-      // .then(res => res.json())
-      // .then(
-      //   (currentPage) => {
-      //     setIsLoaded(true);
-      //     setCurrentPage(currentPage);
-      //   },
-      //   (error) => {
-      //     setIsLoaded(false);
-      //     setError(error);
-      //   }
-      // )
+
+      const newBook = props.map(book =>
+        (book._id === bookIdToUpdate) ? {...book, currentPage: currentPage} : book) // I think this can be modified
     },
   });
 
@@ -185,3 +169,4 @@ export default function CurrentBookCard(props) {
 // [] resize/fix image on highlight book
 // [] style UPDATE PROGRESS button
 // [] fix default layout to row instead of col
+// [] fix when clicked "i'm finished " all books disappear

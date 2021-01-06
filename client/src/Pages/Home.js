@@ -42,10 +42,9 @@ function Home() {
   }
 
   function updateCurrentPage(e, currentPage) {
-    console.log("inside of updateCurrentPage")
-    console.log(e)
+    // console.log("inside of updateCurrentPage")
+    // console.log(e)
     let currPage = currentPage.currentPage;
-    // console.log("inside of updateCurrent page --> " + currentPage.currentPage);
     var bookIdToUpdate = e;
     
     fetch(localURL + `${bookIdToUpdate}`, 

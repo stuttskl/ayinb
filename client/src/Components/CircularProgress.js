@@ -14,7 +14,7 @@ import Box from '@material-ui/core/Box';
 
   React.useEffect(() => {
     setProgress(progressPercentage);
-  }, [progress]);
+  }, [progressPercentage]); // this works and I'm not sure why!!!
 
   return (
     <Box position="relative" display="inline-flex">
@@ -35,7 +35,7 @@ import Box from '@material-ui/core/Box';
         justifyContent="center"
       >
         <Typography variant="caption" component="div" color="textSecondary">
-          {` ${Math.round(progressPercentage.toFixed())}.%`}
+          {` ${Math.round(progressPercentage.toFixed())}%`}
         </Typography>
       </Box>
     </Box>
@@ -43,5 +43,5 @@ import Box from '@material-ui/core/Box';
 }
 
 // TODO: 
-// [] remove . from percentage
+// [x] remove . from percentage
 // [] fix NaN as default progress percentage
