@@ -44,3 +44,4 @@ import Box from '@material-ui/core/Box';
 
 // TODO: 
 // [] remove . from percentage
+// [] fix NaN as default progress percentage

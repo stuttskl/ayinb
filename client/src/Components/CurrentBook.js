@@ -77,52 +77,40 @@ export default function CurrentBookCard(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = React.useState();
 
-
-  // useEffect(() => {
-  //   console.log('mounted')
-  // }, [props.currentPage]);
-
   const formik = useFormik({
     initialValues: {
       currentPage: ''
     },
     validationSchema: validationSchema,
-    // handleChange: (e) => {
-    //   console.log("inside of handle change current page")
-    //   const target = e.target;
-    //   setCurrentPage(target);
-    // },
     onSubmit: (e) => {
       handleClose();
-      let currentPage = e.currentPage;
-      let bookIdToUpdate = props.id;
-      
-      fetch(localURL + `${bookIdToUpdate}`, 
-      {
-        method: 'put',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: JSON.stringify( {currentPage: currentPage} )
-      })
-      .then(res => res.json())
-      .then(
-        (currentPage) => {
-          setIsLoaded(true);
-          setCurrentPage(currentPage);
-        },
-        (error) => {
-          setIsLoaded(false);
-          setError(error);
-        }
-      )
+      // let currentPage = e.currentPage;
+      // let bookIdToUpdate = props.id;
+      props.onUpdatePage(e, currentPage)
+      // fetch(localURL + `${bookIdToUpdate}`, 
+      // {
+      //   method: 'put',
+      //   headers: new Headers({
+      //     'Content-Type': 'application/json',
+      //   }),
+      //   body: JSON.stringify( {currentPage: currentPage} )
+      // })
+      // .then(res => res.json())
+      // .then(
+      //   (currentPage) => {
+      //     setIsLoaded(true);
+      //     setCurrentPage(currentPage);
+      //   },
+      //   (error) => {
+      //     setIsLoaded(false);
+      //     setError(error);
+      //   }
+      // )
     },
   });
 
   const handleOpen = () => { setOpen(true); };
-
   const handleClose = () => { setOpen(false); };
-
   const handleExpandClick = () => { setExpanded(!expanded); };
 
   const body = (
@@ -135,7 +123,6 @@ export default function CurrentBookCard(props) {
           name="currentPage"
           value={currentPage} 
           onChange={formik.handleChange}
-          enableReinitialize={true}
         />
         of {props.pageCount}
       </p>
@@ -197,3 +184,4 @@ export default function CurrentBookCard(props) {
 // TODO:
 // [] resize/fix image on highlight book
 // [] style UPDATE PROGRESS button
+// [] fix default layout to row instead of col

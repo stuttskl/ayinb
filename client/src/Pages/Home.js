@@ -41,6 +41,26 @@ function Home() {
       setCurrentBook([]) 
   }
 
+  function updateCurrentPage(e, currentPage) {
+    console.log("inside of updateCurrentPage")
+    console.log(e)
+    let currPage = currentPage.currentPage;
+    // console.log("inside of updateCurrent page --> " + currentPage.currentPage);
+    var bookIdToUpdate = e;
+    
+    fetch(localURL + `${bookIdToUpdate}`, 
+    {
+      method: 'put',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify( {currentPage: currPage} )
+    })
+    const newBook = currentBook.map(book =>
+      (book._id === bookIdToUpdate) ? {...book, currentPage: currPage} : book) // I think this can be modified
+      setCurrentBook([...newBook])
+  }
+
   return (
     <div>
       <h2>Currently Reading</h2>
@@ -55,6 +75,7 @@ function Home() {
           pageCount={field.pageCount}
           currentPage={field.currentPage}
           onCompleted={setFinished.bind(this, field._id)}
+          onUpdatePage={updateCurrentPage.bind(this, field._id)}
         />
       ))}
     </div>
