@@ -32,16 +32,6 @@ router.post('/', (req, res) => {
     })
 });
 
-// router.post('/new', (req, res) => {
-//   db.Book.create(req.body)
-//     .then(function(newBook) {
-//       res.status(201).res.json(newBook);
-//     })
-//     .catch(function(err) {
-//       res.send(err);
-//     })
-// });
-
 router.get('/:bookId', (req, res) => {
   db.Book.findById(req.params.bookId)
     .then(function(book) {
@@ -53,7 +43,7 @@ router.get('/:bookId', (req, res) => {
 });
 
 router.delete('/:bookId', (req, res) => {
-  db.Book.remove({_id: req.params.bookId})
+  db.Book.deleteOne({_id: req.params.bookId})
     .then(function() {
       res.json({message: 'deleted'})
     })

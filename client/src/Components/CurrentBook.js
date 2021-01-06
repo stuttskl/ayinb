@@ -84,7 +84,6 @@ export default function CurrentBookCard(props) {
     validationSchema: validationSchema,
     onSubmit: (e) => {
       handleClose();
-      // let currentPage = e.currentPage;
       let bookIdToUpdate = props.id;
       props.onUpdatePage(e, currentPage)
 

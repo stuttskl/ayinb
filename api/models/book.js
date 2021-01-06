@@ -28,7 +28,8 @@ var bookSchema = new mongoose.Schema({
     type: Number
   },
   currentPage: {
-    type: Number
+    type: Number,
+    default: 0
   },
   current: {
     type: String,
