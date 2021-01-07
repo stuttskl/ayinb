@@ -16,16 +16,19 @@ import CircularProgress from './CircularProgress';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
+import { red } from '@material-ui/core/colors';
 
 let localURL = "http://localhost:8080/api/books/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 280,
+    maxWidth: 400,
   },
   media: {
     height: 0,
     paddingTop: '130%',
+    width: 300,
+    margin: 'auto',
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -45,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  updateButton: {
+    width: '200px'
+  },
+  currentPageField: {
+    padding: '0px'
+  }
 }));
 
 function rand() {
@@ -84,11 +93,7 @@ export default function CurrentBookCard(props) {
     validationSchema: validationSchema,
     onSubmit: (e) => {
       handleClose();
-      let bookIdToUpdate = props.id;
-      props.onUpdatePage(e, currentPage)
-
-      const newBook = props.map(book =>
-        (book._id === bookIdToUpdate) ? {...book, currentPage: currentPage} : book) // I think this can be modified
+      props.onUpdatePage(e, currentPage);
     },
   });
 
@@ -103,6 +108,7 @@ export default function CurrentBookCard(props) {
         Currently on
         <TextField 
           id="currentPage"
+          className={classes.currentPageField}
           name="currentPage"
           value={currentPage} 
           onChange={formik.handleChange}
@@ -125,11 +131,13 @@ export default function CurrentBookCard(props) {
         image={props.img}
         title="Book Cover"
       />
-      <CircularProgress
-        value={props.currentPage}
-        totalPages={props.pageCount}
-      />
-      <Button onClick={handleOpen}>Update Progress</Button>
+      <CardActions>
+        <CircularProgress
+          value={props.currentPage}
+          totalPages={props.pageCount}
+        /> 
+        <Button color="primary" className={classes.updateButton} variant="contained" onClick={handleOpen}>Update Progress</Button>
+      </CardActions>
       <Modal
         open={open}
         onClose={handleClose}
