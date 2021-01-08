@@ -112,7 +112,7 @@ export default function CurrentBookCard(props) {
           name="currentPage"
           value={currentPage} 
           onChange={formik.handleChange}
-        />
+        /> 
         of {props.pageCount}
       </p>
       <Button color="primary" onClick={formik.handleSubmit}>Ok</Button>
