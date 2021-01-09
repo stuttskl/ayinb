@@ -28,7 +28,7 @@ function AllBooks(props) {
   }, [])
 
   function deleteBook(id) {
-    console.log("inside of delete book")
+    // console.log("inside of delete book")
     fetch(localURL + `${id}`, 
     {
       method: 'delete'
@@ -38,7 +38,7 @@ function AllBooks(props) {
   }
 
   function updateRating(e) {
-    console.log("inside of update rating")
+    // console.log("inside of update rating")
     var newRating = e.target.value; 
     var bookIdToUpdate = e.target.parentElement.id;
     fetch(localURL + `${bookIdToUpdate}`,

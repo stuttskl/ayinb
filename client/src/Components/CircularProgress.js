@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -10,12 +9,12 @@ import Box from '@material-ui/core/Box';
 
   React.useEffect(() => {
     setProgress(progressPercentage);
-  }, [progressPercentage]); // this works and I'm not sure why!!!
+  }, [progressPercentage]); 
 
   return (
     <Box position="relative" display="inline-flex">
       <CircularProgress 
-        size={80} 
+        size={120} 
         variant="determinate" 
         thickness={1.5}
         value={progress}
@@ -30,9 +29,9 @@ import Box from '@material-ui/core/Box';
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="caption" component="div" color="textSecondary">
-          {` ${Math.round(progressPercentage.toFixed())}%`}
-        </Typography>
+      <Typography variant="caption" component="div" color="textSecondary">
+        {` ${Math.round(progressPercentage.toFixed())}%`}
+      </Typography>
       </Box>
     </Box>
   );

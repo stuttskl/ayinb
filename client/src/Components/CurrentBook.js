@@ -16,9 +16,9 @@ import CircularProgress from './CircularProgress';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
-import { red } from '@material-ui/core/colors';
+import './CurrentBook.css';
 
-let localURL = "http://localhost:8080/api/books/";
+// let localURL = "http://localhost:8080/api/books/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '130%',
-    width: 300,
+    maxWidth: '90%',
+    margin: 'auto',
+  },
+  progress: {
     margin: 'auto',
   },
   expand: {
@@ -73,11 +76,10 @@ function getModalStyle() {
 
 const validationSchema = Yup.object().shape({
   currentPage: Yup.number()
-  .required('Current page required!'),
+  .required('Current page required!'), // still need to figure out how to get this to appear
 });
 
 export default function CurrentBookCard(props) {
-  
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [open, setOpen] = React.useState(false);
@@ -173,7 +175,7 @@ export default function CurrentBookCard(props) {
 }
 
 // TODO:
-// [] resize/fix image on highlight book
-// [] style UPDATE PROGRESS button
+// [x] resize/fix image on highlight book
+// [x] style UPDATE PROGRESS button
 // [] fix default layout to row instead of col
 // [] fix when clicked "i'm finished " all books disappear

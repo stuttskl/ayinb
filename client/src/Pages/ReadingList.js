@@ -3,9 +3,7 @@ import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
-// import { useDynamicAvatarStyles } from '@mui-treasury/styles/avatar/dynamic';
 import BookItem from '../Components/BookItem';
-// import { useFormik } from 'formik';
 
 const useStyles = makeStyles(() => ({
   card: {
