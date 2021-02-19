@@ -39,7 +39,7 @@ export default function FormPropsTextFields() {
     validationSchema: validationSchema,
 
     onSubmit: (values) => {
-      fetch('http://localhost:8080/api/books/', {
+      fetch('https://ayib-api.herokuapp.com/api/books/', {
         method: 'post',
         headers: new Headers({
           'Content-Type': 'application/json',
