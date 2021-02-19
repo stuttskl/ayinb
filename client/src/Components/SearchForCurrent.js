@@ -97,7 +97,7 @@ export default function SearchForm() {
   } else {
     toRender = 
     <>
-      <div className="container">
+      {/* <div className="container"> */}
         <h1>Search for a Book</h1>
           <form onSubmit={formik.handleSubmit}>
             <TextField
@@ -112,14 +112,14 @@ export default function SearchForm() {
               Submit
             </Button>
           </form>
-      </div>
+      {/* </div> */}
       <Column p={0} gap={0} className={styles.card}>
         {data.map(item => (
           <CurrentBookItem 
             id={item.id}
             title={item.volumeInfo.title} 
             author={item.volumeInfo.authors} 
-            src={item.volumeInfo.imageLinks.extraLarge === undefined ? "" : item.volumeInfo.imageLinks.extraLarge} // if no img associated with book, don't display any img
+            src={item.volumeInfo.imageLinks === undefined ? "" : item.volumeInfo.imageLinks} // if no img associated with book, don't display any img
             desc={item.volumeInfo.description} // TODO: fix desc so that it wraps
             pageCount={item.volumeInfo.pageCount}
           />
@@ -129,3 +129,5 @@ export default function SearchForm() {
   }
   return toRender;
 };
+
+// TODO: no book images are displaying in search results

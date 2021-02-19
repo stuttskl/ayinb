@@ -196,12 +196,12 @@ export default function MiniDrawer() {
                 <ListItemText primary="Add a Book" />
               </ListItem> 
             </Link>
-            <Link className={classes.toolbar} to="/readinglist">
+            {/* <Link className={classes.toolbar} to="/readinglist">
               <ListItem button key="Reading List">
                 <ListItemIcon><ListIcon /></ListItemIcon>
                 <ListItemText primary="Reading List" />
               </ListItem> 
-            </Link>
+            </Link> */}
             <Link className={classes.toolbar} to="/search">
               <ListItem button key="Search">
                 <ListItemIcon><SearchIcon /></ListItemIcon>
